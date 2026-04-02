@@ -1,0 +1,387 @@
+/* ===== CSS Variables ===== */
+:root {
+  --bg: #f5f3ef;
+  --bg2: #eceae4;
+  --card: #ffffff;
+  --card-border: #e2dfd8;
+  --text: #1a1814;
+  --text-muted: #7a7570;
+  --accent: #e85d26;
+  --accent2: #2563eb;
+  --food: #22c55e;
+  --transport: #3b82f6;
+  --fun: #f97316;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  --radius: 16px;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition: 0.2s ease;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0e0c;
+  --bg2: #1a1916;
+  --card: #1f1e1b;
+  --card-border: #2e2c28;
+  --text: #f0ede6;
+  --text-muted: #8a8780;
+  --shadow: 0 2px 16px rgba(0,0,0,0.4);
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+.theme-toggle:hover { transform: scale(1.1); }
+
+/* ===== App Wrapper ===== */
+.app-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 16px 60px;
+}
+
+/* ===== Header ===== */
+.app-header { margin-bottom: 28px; }
+.app-title {
+  font-family: var(--font-head);
+  font-size: clamp(36px, 6vw, 52px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--text);
+}
+.accent { color: var(--accent); }
+.app-subtitle {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* ===== Balance Card ===== */
+.balance-card {
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 28px 28px 22px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.balance-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.12;
+}
+.balance-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+.balance-amount {
+  font-family: var(--font-head);
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.balance-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.balance-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+.balance-meta {
+  font-size: 13px;
+  opacity: 0.55;
+}
+
+/* ===== Category Pills ===== */
+.category-pills {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.pill {
+  flex: 1;
+  min-width: 100px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: box-shadow var(--transition);
+}
+.pill:hover { box-shadow: var(--shadow); }
+.pill strong {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.pill-food { border-top: 3px solid var(--food); }
+.pill-transport { border-top: 3px solid var(--transport); }
+.pill-fun { border-top: 3px solid var(--fun); }
+
+/* ===== Cards ===== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: background var(--transition);
+}
+.card-title {
+  font-family: var(--font-head);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+
+/* ===== Form Card ===== */
+.form-card { margin-bottom: 16px; }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.form-group label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.form-group input,
+.form-group select {
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--card-border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--accent);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-error {
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: rgba(232, 93, 38, 0.08);
+  border-radius: 8px;
+}
+.hidden { display: none !important; }
+
+.btn-add {
+  width: 100%;
+  padding: 13px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.btn-add:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-add:active { transform: translateY(0); }
+
+/* ===== Bottom Grid ===== */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ===== Transaction List ===== */
+.card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header-row .card-title { margin-bottom: 0; }
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.sort-controls select {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+
+.transaction-list {
+  max-height: 320px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.transaction-list::-webkit-scrollbar { width: 4px; }
+.transaction-list::-webkit-scrollbar-track { background: transparent; }
+.transaction-list::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 2px; }
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 10px;
+  border-left: 3px solid transparent;
+  animation: slideIn 0.2s ease;
+  gap: 8px;
+}
+.transaction-item.cat-Food { border-left-color: var(--food); }
+.transaction-item.cat-Transport { border-left-color: var(--transport); }
+.transaction-item.cat-Fun { border-left-color: var(--fun); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.tx-info { flex: 1; min-width: 0; }
+.tx-name {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+.tx-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.tx-amount {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+.tx-delete {
+  background: none;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.tx-delete:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.empty-icon { font-size: 32px; margin-bottom: 10px; }
+
+/* ===== Chart Card ===== */
+.chart-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+.chart-empty {
+  position: absolute;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+canvas#spendingChart { max-width: 100%; }
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .app-wrapper { padding: 24px 12px 48px; }
+  .bottom-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .category-pills { gap: 8px; }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense & Budget Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+    <span class="toggle-icon">🌙</span>
+  </div>
+
+  <div class="app-wrapper">
+    <header class="app-header">
+      <h1 class="app-title">Budget<span class="accent">.</span></h1>
+      <p class="app-subtitle">Track your spending, stay in control</p>
+    </header>
+
+    <!-- Balance Card -->
+    <div class="balance-card">
+      <div class="balance-label">TOTAL BALANCE</div>
+      <div class="balance-amount" id="totalBalance">Rp 0</div>
+      <div class="balance-bar">
+        <div class="balance-bar-fill" id="balanceFill"></div>
+      </div>
+      <div class="balance-meta" id="balanceMeta">No transactions yet</div>
+    </div>
+
+    <!-- Category Summary Pills -->
+    <div class="category-pills" id="categoryPills">
+      <div class="pill pill-food"><span>🍜 Food</span> <strong id="pillFood">Rp 0</strong></div>
+      <div class="pill pill-transport"><span>🚗 Transport</span> <strong id="pillTransport">Rp 0</strong></div>
+      <div class="pill pill-fun"><span>🎉 Fun</span> <strong id="pillFun">Rp 0</strong></div>
+    </div>
+
+    <!-- Input Form -->
+    <section class="card form-card">
+      <h2 class="card-title">Add Transaction</h2>
+      <div class="form-group">
+        <label for="itemName">Item Name</label>
+        <input type="text" id="itemName" placeholder="e.g. Nasi Goreng" autocomplete="off" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="itemAmount">Amount (Rp)</label>
+          <input type="number" id="itemAmount" placeholder="e.g. 15000" min="0" />
+        </div>
+        <div class="form-group">
+          <label for="itemCategory">Category</label>
+          <select id="itemCategory">
+            <option value="Food">🍜 Food</option>
+            <option value="Transport">🚗 Transport</option>
+            <option value="Fun">🎉 Fun</option>
+          </select>
+        </div>
+      </div>
+      <div id="formError" class="form-error hidden">⚠️ Please fill in all fields.</div>
+      <button class="btn-add" id="addBtn" onclick="addTransaction()">
+        <span>+ Add Transaction</span>
+      </button>
+    </section>
+
+    <!-- Transactions + Chart -->
+    <div class="bottom-grid">
+      <section class="card list-card">
+        <div class="card-header-row">
+          <h2 class="card-title">Transactions</h2>
+          <div class="sort-controls">
+            <label for="sortSelect">Sort:</label>
+            <select id="sortSelect" onchange="renderAll()">
+              <option value="newest">Newest</option>
+              <option value="amount-desc">Amount ↓</option>
+              <option value="amount-asc">Amount ↑</option>
+              <option value="category">Category</option>
+            </select>
+          </div>
+        </div>
+        <div class="transaction-list" id="transactionList">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">💸</div>
+            <p>No transactions yet.<br/>Add one above!</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card chart-card">
+        <h2 class="card-title">Spending by Category</h2>
+        <div class="chart-wrapper">
+          <canvas id="spendingChart"></canvas>
+          <div class="chart-empty" id="chartEmpty">Add transactions<br/>to see chart</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
